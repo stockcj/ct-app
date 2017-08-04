@@ -8,6 +8,7 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { MaterialComponents } from './material-components/app.material.module';
+import { FormsModule } from '@angular/forms';
 import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
+    FormsModule,
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
     MaterialComponents,

@@ -1,1 +1,4 @@
-<ct-login-view [signInError]="'Please check username and password'"></ct-login-view>
+<ct-login-view 
+  [signInError]="loginError"
+  (login)="login($event)">
+</ct-login-view>
