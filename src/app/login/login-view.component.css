@@ -1,0 +1,28 @@
+.back-button {
+  position: fixed;
+}
+
+.login-area {
+  margin: 0;
+  width: 250px;
+}
+
+.full-width {
+  width: 100%
+}
+
+.button-row {
+  display: flex;
+  align-items: right;
+  justify-content: space-around;
+}
+
+.login-button {
+  text-decoration: underline;
+  font-size:x-small;
+}
+
+.sign-in-error {
+  color: darkred;
+  font-size: x-small;
+}
