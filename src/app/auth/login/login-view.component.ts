@@ -7,6 +7,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class LoginViewComponent implements OnInit {
   @Input()
+  disableButton : boolean;
+
+  @Input()
+  buttonText : string;
+
+  @Input()
   user : any;
 
   @Input()

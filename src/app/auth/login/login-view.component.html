@@ -23,7 +23,7 @@
     </md-card-content>
     <md-card-actions class="button-row">
       <button type="button" class="login-button" md-button>Lost password</button>
-      <button type="submit" md-raised-button color="primary">Sign in</button>
+      <button type="submit" [disabled]="disableButton" md-raised-button color="primary">{{buttonText}}</button>
     </md-card-actions>
     </form>
   </md-card>

@@ -1,4 +1,6 @@
 <ct-login-view 
   [signInError]="loginError"
+  [disableButton]="isDisabled"
+  [buttonText]="signInText"
   (login)="login($event)">
 </ct-login-view>

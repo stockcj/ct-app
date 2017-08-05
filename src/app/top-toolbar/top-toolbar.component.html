@@ -1,5 +1,22 @@
 <md-toolbar color="primary">
   <button md-button routerLink="/"><ng-fa name='home' size='2x'></ng-fa>{{title}}</button>
   <span class="toolbar-right"></span>
-  <button md-button routerLink="/login">Sign in<ng-fa name='sign-in'></ng-fa></button>
+  <button *ngIf="!user" md-button routerLink="/login">Sign in<ng-fa name='sign-in'></ng-fa></button>
+  
+  <div *ngIf="user">
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+      <ng-fa name="ellipsis-v"></ng-fa>
+    </button>
+    <md-menu #menu="mdMenu">
+      <button md-menu-item>
+        <ng-fa name="user"></ng-fa>
+        <span>{{user.username}}</span>
+      </button>
+      <button md-menu-item (click)="logout()">
+        <ng-fa name='sign-out'></ng-fa>
+        <span>Sign out</span>
+      </button>
+    </md-menu>
+  </div>
+
 </md-toolbar>
