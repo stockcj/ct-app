@@ -1,14 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { MaterialComponents } from './material-components/app.material.module';
-import { FormsModule } from '@angular/forms';
 import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -24,6 +27,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
