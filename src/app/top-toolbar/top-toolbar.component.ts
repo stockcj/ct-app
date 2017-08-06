@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../users/user';
 import { AuthService } from '../auth/auth.service';
+import { User } from '../users/user';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
+import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'ct-top-toolbar',
@@ -18,18 +20,22 @@ export class TopToolbarComponent implements OnInit {
   constructor(private auth: AuthService,
               public loginValidationBar: MdSnackBar,
               private router: Router) {
-    this.user = auth.currentUser();
   }
 
   logout(){
-    this.router.navigate(['/login']).then(() => {
-      this.loginValidationBar.open("Logout successful", "Ok", {
-        duration: 2000
+    this.auth.logOut().subscribe(() => {
+      this.router.navigate(['/login']).then(() => {
+        this.loginValidationBar.open("Logout successful", "Ok", {
+          duration: 2000
+        });
       });
     });
   }
 
   ngOnInit() {
+    this.auth.currentUser().subscribe(user => {
+      this.user = user;
+    })
   }
 
 }

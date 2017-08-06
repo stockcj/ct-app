@@ -10,7 +10,7 @@
     <md-menu #menu="mdMenu">
       <button md-menu-item>
         <ng-fa name="user"></ng-fa>
-        <span>{{user.username}}</span>
+        <span>{{user?.email}}</span>
       </button>
       <button md-menu-item (click)="logout()">
         <ng-fa name='sign-out'></ng-fa>

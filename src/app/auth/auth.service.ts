@@ -1,34 +1,28 @@
 import { Injectable } from '@angular/core';
 import { User } from '../users/user';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
-  users : User[];
-  constructor() { 
-    this.users = [
-      {username: 'christopher', password: '123', email: 'chris@example.com'}
-    ];
+
+  constructor(public afAuth: AngularFireAuth) {
   }
 
-  login(username, password) : Observable<User> {
-    let userAccepted = this.users
-      .filter(x => x.username === username)
-      .filter(y => y.password === password);
-    if(userAccepted && userAccepted.length === 1) {
-      localStorage.setItem('currentUser', JSON.stringify({token: "jwt will come later", username: userAccepted[0].username}))
-      return Observable.of(userAccepted[0]);
-    } else {
-      return Observable.of(null);
-    }
+  login(email, password) : Observable<firebase.User> {
+    let promise = <Promise<firebase.User>>
+    this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    return Observable.fromPromise(promise);
   }
 
-  currentUser() {
-    return JSON.parse(localStorage.getItem('currentUser'));
+  currentUser(): any {
+    return this.afAuth.authState
   }
 
-  logOut() {
-    return localStorage.removeItem('currentUser');
+  logOut(): any {
+    let promise = this.afAuth.auth.signOut();
+    return Observable.fromPromise(promise)
   }
 
 }

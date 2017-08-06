@@ -3,6 +3,7 @@ import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
+import { AuthUser } from '../auth.user';
 
 @Component({
   selector: 'ct-login',
@@ -18,18 +19,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(public loginValidationBar: MdSnackBar, 
               private router : Router,
               private authService : AuthService) {
-                this.authService.logOut();
    }
 
-   login(user){
+   login(user : AuthUser){
      this.isDisabled = true;
      this.signInText = "Signing in..."
      if(this.request){
        this.request.unsubscribe();
      }
     this.request = this.authService
-    .login(user.username, user.password)
-    .delay(3000)
+    .login(user.email, user.password)
+    .delay(2000)
     .subscribe(
       (lUser) => {
       if(lUser) {
