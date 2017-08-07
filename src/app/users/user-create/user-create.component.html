@@ -1,4 +1,6 @@
-<form *ngIf="creatingUser" (ngSubmit)="onSubmit()">
+<form *ngIf="creatingUser" 
+      (ngSubmit)="onSubmit()"
+      #userForm="ngForm">
   <md-card>
     <md-card-content>
       <h3><ng-fa name="user"></ng-fa> Add User</h3>
@@ -6,24 +8,42 @@
         <tr>
           <td>
             <md-input-container class="full-width">
-              <input mdInput 
+              <input mdInput
+                     required
                      placeholder="Username"
                      [(ngModel)]="user.username"
-                     name="username">
+                     name="username"
+                     #username="ngModel">
+              <md-error>
+                     Username required
+              </md-error>
             </md-input-container>
           </td>
           <td>
             <md-input-container class="full-width">
               <input mdInput
+                     required
+                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                      placeholder="Email"
                      [(ngModel)]="user.email"
-                     name="email">
+                     name="email"
+                     #email="ngModel"
+                     id="email">
+              <md-error>
+                     Email invalid
+              </md-error>
             </md-input-container>
           </td>
-          <button type="submit" md-icon-button color="primary">
+          <button type="submit" 
+                  md-icon-button 
+                  color="primary"
+                  [disabled]="!userForm.form.valid">
             <ng-fa name="floppy-o"></ng-fa>
           </button>
-          <button type="button" md-icon-button color="warn" (click)="creatingNewUser(false)">
+          <button type="button" 
+                  md-icon-button 
+                  color="warn" 
+                  (click)="creatingNewUser(false)">
             <ng-fa name="ban"></ng-fa>
           </button>
         </tr>
