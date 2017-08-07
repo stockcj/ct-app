@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth/auth-guard';
+import { UserService } from './users/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -19,10 +21,15 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LoginViewComponent } from './auth/login/login-view.component';
 import { AuthService } from './auth/auth.service';
+import { UsersViewComponent } from './users/users-view/users-view.component';
+import { UsersListComponent } from './users/users-view/users-list.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { UserItemComponent } from './users/user-item/user-item.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'users', component: UsersViewComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -43,9 +50,15 @@ const appRoutes: Routes = [
     TopToolbarComponent,
     HomeComponent,
     LoginComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    UsersViewComponent,
+    UsersListComponent,
+    UserCreateComponent,
+    UserItemComponent
   ],
-  providers: [AuthService],
+  providers: [AuthService,
+              UserService,
+              AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

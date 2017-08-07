@@ -1,16 +1,35 @@
 import { NgModule } from '@angular/core';
-import { MdDatepickerModule, 
-         MdRadioModule, 
-         MdChipsModule, 
-         MdToolbarModule, 
-         MdButtonModule, 
-         MdCardModule, 
-         MdInputModule, 
+import { MdDatepickerModule,
+         MdRadioModule,
+         MdChipsModule,
+         MdToolbarModule,
+         MdButtonModule,
+         MdCardModule,
+         MdInputModule,
          MdSnackBarModule,
-         MdMenuModule } from '@angular/material';
+         MdMenuModule,
+         MdSidenavModule } from '@angular/material';
 
 @NgModule({
-  imports: [MdDatepickerModule, MdRadioModule, MdChipsModule, MdToolbarModule, MdButtonModule, MdCardModule, MdInputModule, MdSnackBarModule, MdMenuModule],
-  exports: [MdDatepickerModule, MdRadioModule, MdChipsModule, MdToolbarModule, MdButtonModule, MdCardModule, MdInputModule, MdSnackBarModule, MdMenuModule],
+  imports: [MdDatepickerModule,
+            MdRadioModule,
+            MdChipsModule,
+            MdToolbarModule,
+            MdButtonModule,
+            MdCardModule,
+            MdInputModule,
+            MdSnackBarModule,
+            MdMenuModule,
+            MdSidenavModule],
+  exports: [MdDatepickerModule,
+            MdRadioModule,
+            MdChipsModule,
+            MdToolbarModule,
+            MdButtonModule,
+            MdCardModule,
+            MdInputModule,
+            MdSnackBarModule,
+            MdMenuModule,
+            MdSidenavModule],
 })
-export class MaterialComponents { }
+export class MaterialComponents {}

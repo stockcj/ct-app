@@ -10,18 +10,24 @@ export class AuthService {
   constructor(public afAuth: AngularFireAuth) {
   }
 
-  login(email, password) : Observable<firebase.User> {
-    let promise = <Promise<firebase.User>>
+  login(email, password): Observable<firebase.User> {
+    const promise = <Promise<firebase.User>>
     this.afAuth.auth.signInWithEmailAndPassword(email, password);
     return Observable.fromPromise(promise);
   }
 
   currentUser(): any {
+    return this.afAuth.authState;
+  }
+
+  isAuthenticated(): Observable<boolean> {
     return this.afAuth.authState
+    .take(1)
+    .map(authState => !!authState);
   }
 
   logOut(): any {
-    let promise = this.afAuth.auth.signOut();
+    const promise = this.afAuth.auth.signOut();
     return Observable.fromPromise(promise)
   }
 
