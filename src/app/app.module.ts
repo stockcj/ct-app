@@ -25,6 +25,7 @@ import { UsersViewComponent } from './users/users-view/users-view.component';
 import { UsersListComponent } from './users/users-view/users-list.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserItemComponent } from './users/user-item/user-item.component';
+import { EqualTextValidator} from './users/equal.validator';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     UsersViewComponent,
     UsersListComponent,
     UserCreateComponent,
-    UserItemComponent
+    UserItemComponent,
+    EqualTextValidator
   ],
   providers: [AuthService,
               UserService,

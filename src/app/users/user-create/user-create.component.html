@@ -1,54 +1,85 @@
 <form *ngIf="creatingUser" 
-      (ngSubmit)="onSubmit()"
-      #userForm="ngForm">
-  <md-card>
-    <md-card-content>
+      (ngSubmit)="onSubmit(userForm)"
+      #userForm="ngForm"
+      fxFlexFill 
+      fxLayout="'row'"
+      fxLayoutAlign="center start">
+  <md-card fxFlex="450px">
+    <md-card-content fxFill fxLayout="column">
       <h3><ng-fa name="user"></ng-fa> Add User</h3>
-      <table class="full-width" cellspacing ="0">
-        <tr>
-          <td>
-            <md-input-container class="full-width">
-              <input mdInput
-                     required
-                     placeholder="Username"
-                     [(ngModel)]="user.username"
-                     name="username"
-                     #username="ngModel">
-              <md-error>
-                     Username required
-              </md-error>
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="full-width">
-              <input mdInput
-                     required
-                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                     placeholder="Email"
-                     [(ngModel)]="user.email"
-                     name="email"
-                     #email="ngModel"
-                     id="email">
-              <md-error>
-                     Email invalid
-              </md-error>
-            </md-input-container>
-          </td>
-          <button type="submit" 
-                  md-icon-button 
-                  color="primary"
-                  [disabled]="!userForm.form.valid">
-            <ng-fa name="floppy-o"></ng-fa>
-          </button>
-          <button type="button" 
-                  md-icon-button 
-                  color="warn" 
-                  (click)="creatingNewUser(false)">
-            <ng-fa name="ban"></ng-fa>
-          </button>
-        </tr>
-      </table>
+      <md-input-container>
+        <input mdInput
+              fxFlex="100"
+              required
+              minlength="3"
+              placeholder="Username"
+              [(ngModel)]="user.username"
+              name="username"
+              #username="ngModel">
+        <md-error *ngIf="!username.errors?.minlength">
+                Username required
+        </md-error>
+        <md-error *ngIf="username.errors?.minlength">
+                Username too short (min. 3 characters)
+        </md-error>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput
+                required
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                placeholder="Email"
+                [(ngModel)]="user.email"
+                name="email"
+                #email="ngModel"
+                id="email">
+        <md-error>
+                Email invalid
+        </md-error>
+      </md-input-container>
+      <md-input-container>
+        <input name="password" #password="ngModel" mdInput
+               type="password"
+               required
+               minlength="6"
+               placeholder="Password"
+               [(ngModel)]="user.password" >
+        <md-error *ngIf="!password.errors?.minlength">
+                Password required
+        </md-error>
+        <md-error *ngIf="password.errors?.minlength">
+                Password too short (min. 3 characters)
+        </md-error>
+      </md-input-container>
+      <md-input-container>
+        <input name="repeatPassword" #repeatPassword="ngModel" mdInput
+               validateEqualTo="password"
+               type="password"
+               required
+               minlength="6"
+               placeholder="Confirm Password"
+               [(ngModel)]="user.confirmPassword" >
+        <md-error *ngIf="!repeatPassword.errors?.validateEqual">
+                Confirmation of password is required
+        </md-error>
+        <md-error *ngIf="repeatPassword.errors?.validateEqual">
+                Passwords do not match
+        </md-error>
+      </md-input-container>
     </md-card-content>
+    <md-card-actions fxLayoutAlign="end" fxLayout="row">
+      <button type="button" 
+              md-icon-button 
+              color="warn" 
+              (click)="creatingNewUser(false)">
+        <ng-fa name="ban"></ng-fa>
+      </button>
+      <button type="submit" 
+              md-icon-button 
+              color="primary"
+              [disabled]="!userForm.form.valid">
+        <ng-fa name="floppy-o"></ng-fa>
+      </button>
+    </md-card-actions>
   </md-card>
 </form>
 <div *ngIf="!creatingUser">
