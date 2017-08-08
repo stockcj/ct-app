@@ -3,6 +3,7 @@ import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from './user';
+import {Profile} from './profile';
 import { ReplaySubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import * as firebase from 'firebase/app';
@@ -24,12 +25,13 @@ export class UserService {
     if (!this.app) {
       this.app = firebase.initializeApp(environment.firebase, 'secondary');
     }
-    this.app.auth().createUserWithEmailAndPassword(user.email, user.password)
+    this.app.auth().createUserWithEmailAndPassword(user.profile.email, user.password)
      .then(fbAuth => {
-       this.db.list('users').push({
-         email: user.email,
-         username: user.username,
-         uid: fbAuth.uid
+       this.db.object('users/${fbAuth.uid}').set({
+         profile:{
+          email: user.profile.email,
+          username: user.profile.username,
+         }
        })
         .then(() => {
           resultSubject.next(user);
@@ -45,7 +47,9 @@ export class UserService {
   }
 
   deleteUser($key: string) {
-    this.db.list('users').remove($key);
+    if($key !== undefined) {
+      this.db.list('users').remove($key);
+    }
   }
 
 }

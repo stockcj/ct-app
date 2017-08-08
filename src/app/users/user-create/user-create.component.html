@@ -16,7 +16,7 @@
               required
               minlength="3"
               placeholder="Username"
-              [(ngModel)]="user.username"
+              [(ngModel)]="user.profile.username"
               name="username"
               #username="ngModel">
         <md-error *ngIf="!username.errors?.minlength">
@@ -31,7 +31,7 @@
                 required
                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                 placeholder="Email"
-                [(ngModel)]="user.email"
+                [(ngModel)]="user.profile.email"
                 name="email"
                 #email="ngModel"
                 id="email">
