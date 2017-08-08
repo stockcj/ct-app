@@ -7,6 +7,9 @@
   <md-card fxFlex="450px">
     <md-card-content fxFill fxLayout="column">
       <h3><ng-fa name="user"></ng-fa> Add User</h3>
+      <md-error [ngStyle]="{'padding-bottom': '15px'}">
+                {{error}}
+      </md-error>
       <md-input-container>
         <input mdInput
               fxFlex="100"

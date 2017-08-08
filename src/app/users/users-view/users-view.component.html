@@ -1,3 +1,8 @@
 <ct-top-toolbar [title]="'Contingency Tracker - Users'"></ct-top-toolbar>
-<ct-user-create (creatingUserEvent)="creatingUserEvent($event)" (createUserEvent)="createUserEvent($event)"></ct-user-create>
+<ct-user-create 
+  [creatingUser]="creatingUser"
+  [user]="user"
+  [error]="error"
+  (creatingUserEvent)="creatingUserEvent($event)" 
+  (createUserEvent)="createUserEvent($event)"></ct-user-create>
 <ct-users-list *ngIf="!creatingUser" [users]="users"></ct-users-list>

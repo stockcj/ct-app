@@ -10,9 +10,10 @@ import { User } from '../user';
 export class UsersViewComponent implements OnInit {
 
   users: Observable<User[]>;
-  user: User;
 
   creatingUser: boolean;
+  user: User;
+  error: string;
 
   constructor(private userService: UserService) {}
 
@@ -26,8 +27,14 @@ export class UsersViewComponent implements OnInit {
   }
 
   createUserEvent(user) {
-    this.userService.createUser(user);
-    this.creatingUser = false;
+    this.userService.createUser(user)
+     .subscribe(() => {
+       this.creatingUser = false;
+       this.error = null;
+     },
+     err => {
+      this.error = err.message;
+     });
   }
 
 }
