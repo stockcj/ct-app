@@ -2,6 +2,7 @@ import { UserService } from './../user.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
+import { Profile } from '../profile'
 
 @Component({
   selector: 'ct-users-view',
@@ -19,6 +20,7 @@ export class UsersViewComponent implements OnInit {
 
   ngOnInit() {
     this.user = new User();
+    this.user.profile = new Profile();
     this.users = this.userService.getUsers();
   }
 
