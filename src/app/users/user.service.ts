@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireModule} from 'angularfire2';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from './user';
 import {Profile} from './profile';
-import { ReplaySubject } from 'rxjs';
+import { Role } from './roles/role';
+import { ReplaySubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import * as firebase from 'firebase/app';
 
@@ -19,6 +20,10 @@ export class UserService {
     return this.db.list('users');
   }
 
+  getUser($key: string): FirebaseObjectObservable<User[]> {
+    return this.db.object('users/' + $key);
+  }
+
   createUser(user: User): ReplaySubject<any> {
     const resultSubject = new ReplaySubject(1);
 
@@ -27,12 +32,20 @@ export class UserService {
     }
     this.app.auth().createUserWithEmailAndPassword(user.profile.email, user.password)
      .then(fbAuth => {
-       this.db.object('users/${fbAuth.uid}').set({
-         profile:{
+       const updateUserData = {};
+       updateUserData[`roles/${user.role.$key}/users/${fbAuth.uid}`] = true;
+       updateUserData[`users/${fbAuth.uid}`] = {
+        profile: {
+          displayName: user.profile.displayName,
           email: user.profile.email,
           username: user.profile.username,
-         }
-       })
+         },
+        role: {
+          id: user.role.$key,
+          name: user.role.name
+        }
+       };
+       this.db.object('/').update(updateUserData)
         .then(() => {
           resultSubject.next(user);
         })
@@ -46,10 +59,21 @@ export class UserService {
     return resultSubject;
   }
 
-  deleteUser($key: string) {
-    if($key !== undefined) {
-      this.db.list('users').remove($key);
+  deleteUser(user: User): ReplaySubject<any> {
+    const resultSubject = new ReplaySubject(1);
+    if (user !== undefined && user.$key !== undefined) {
+      const dataToDelete = {};
+      dataToDelete[`users/${user.$key}`] = null;
+      dataToDelete[`roles/${user.role.id}/users/${user.$key}`] = null;
+      this.db.object('/').update(dataToDelete)
+        .then(() => {
+          resultSubject.next(user);
+        })
+        .catch(err => {
+          resultSubject.error(err);
+        });
     }
+    return resultSubject;
   }
 
 }

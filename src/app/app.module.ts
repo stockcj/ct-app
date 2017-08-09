@@ -31,7 +31,11 @@ import { EqualTextValidator} from './users/equal.validator';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'users', component: UsersViewComponent, canActivate: [AuthGuard] },
+  { path: 'users',
+    component: UsersViewComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['admin']}
+  },
 ];
 
 @NgModule({

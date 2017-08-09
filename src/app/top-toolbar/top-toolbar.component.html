@@ -8,9 +8,9 @@
       <ng-fa name="ellipsis-v"></ng-fa>
     </button>
     <md-menu #menu="mdMenu">
-      <button md-menu-item>
+      <button md-menu-item disabled="true">
         <ng-fa name="user"></ng-fa>
-        <span>{{user?.email}}</span>
+        <span>{{user?.profile.displayName}}</span>
       </button>
       <button md-menu-item (click)="logout()">
         <ng-fa name='sign-out'></ng-fa>

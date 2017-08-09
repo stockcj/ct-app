@@ -1,3 +1,5 @@
+import { FirebaseObjectObservable } from 'angularfire2/database';
+import { UserService } from './../users/user.service';
 import { Injectable } from '@angular/core';
 import { User } from '../users/user';
 import { Observable } from 'rxjs';
@@ -7,7 +9,8 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth,
+              private userService: UserService) {
   }
 
   login(email, password): Observable<firebase.User> {
@@ -16,19 +19,24 @@ export class AuthService {
     return Observable.fromPromise(promise);
   }
 
-  currentUser(): any {
-    return this.afAuth.authState;
+  currentUser(): Observable<User> {
+    return this.afAuth.authState
+      .switchMap((authState: firebase.User) => authState ?
+        this.userService.getUser(authState.uid) :
+        Observable.of(null));
   }
 
-  isAuthenticated(): Observable<boolean> {
-    return this.afAuth.authState
-    .take(1)
-    .map(authState => !!authState);
+  isAuthenticated(roles: string[]): Observable<boolean> {
+    return this.currentUser()
+    .switchMap(user => roles ?
+      Observable.of(!!user && roles.indexOf(user.role.name) > -1) :
+      Observable.of(!!user)
+    );
   }
 
   logOut(): any {
     const promise = this.afAuth.auth.signOut();
-    return Observable.fromPromise(promise)
+    return Observable.fromPromise(promise);
   }
 
 }

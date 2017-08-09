@@ -28,6 +28,22 @@
       </md-input-container>
       <md-input-container>
         <input mdInput
+              fxFlex="100"
+              required
+              minlength="3"
+              placeholder="Display name"
+              [(ngModel)]="user.profile.displayName"
+              name="displayName"
+              #displayName="ngModel">
+        <md-error *ngIf="!displayName.errors?.minlength">
+                Display name required
+        </md-error>
+        <md-error *ngIf="displayName.errors?.minlength">
+                Display name too short (min. 3 characters)
+        </md-error>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput
                 required
                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                 placeholder="Email"

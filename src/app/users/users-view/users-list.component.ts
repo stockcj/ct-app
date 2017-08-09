@@ -18,8 +18,13 @@ export class UsersListComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteUser($key) {
-    this.userService.deleteUser($key);
+  deleteUser(user: User) {
+    this.userService.deleteUser(user).subscribe(() => {
+      console.log('deleting', user);
+    },
+    err => {
+      console.log('err', err);
+    });
   }
 
 }
