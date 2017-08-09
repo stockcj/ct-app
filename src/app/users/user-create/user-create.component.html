@@ -45,7 +45,7 @@
                required
                minlength="6"
                placeholder="Password"
-               [(ngModel)]="user.password" >
+               [(ngModel)]="user.password">
         <md-error *ngIf="!password.errors?.minlength">
                 Password required
         </md-error>
@@ -68,6 +68,9 @@
                 Passwords do not match
         </md-error>
       </md-input-container>
+      <md-select placeholder="Role" [(ngModel)]="user.role" name="role" required id="role-selector">
+        <md-option *ngFor="let role of roles" [value]="role">{{role.name}}</md-option>
+      </md-select>
     </md-card-content>
     <md-card-actions fxLayoutAlign="end" fxLayout="row">
       <button type="button" 

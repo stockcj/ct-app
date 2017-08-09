@@ -8,7 +8,8 @@ import { MdDatepickerModule,
          MdInputModule,
          MdSnackBarModule,
          MdMenuModule,
-         MdSidenavModule } from '@angular/material';
+         MdSidenavModule,
+         MdSelectModule } from '@angular/material';
 
 @NgModule({
   imports: [MdDatepickerModule,
@@ -20,7 +21,8 @@ import { MdDatepickerModule,
             MdInputModule,
             MdSnackBarModule,
             MdMenuModule,
-            MdSidenavModule],
+            MdSidenavModule,
+            MdSelectModule ],
   exports: [MdDatepickerModule,
             MdRadioModule,
             MdChipsModule,
@@ -30,6 +32,7 @@ import { MdDatepickerModule,
             MdInputModule,
             MdSnackBarModule,
             MdMenuModule,
-            MdSidenavModule],
+            MdSidenavModule,
+            MdSelectModule],
 })
 export class MaterialComponents {}

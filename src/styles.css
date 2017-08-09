@@ -17,3 +17,13 @@ body {
 md-card{
   margin: 2em;
 }
+
+.mat-select-trigger {
+  font-size: 14px !important;
+}
+
+.mat-select {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 75%;
+}

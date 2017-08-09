@@ -16,7 +16,7 @@ export class UserService {
               private afAuth: AngularFireAuth ) { }
 
   getUsers(): FirebaseListObservable<User[]> {
-    return this.db.list('/users');
+    return this.db.list('users');
   }
 
   createUser(user: User): ReplaySubject<any> {

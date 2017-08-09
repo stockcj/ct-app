@@ -1,3 +1,4 @@
+import { RolesService } from './users/roles/roles.service';
 import { AuthGuard } from './auth/auth-guard';
 import { UserService } from './users/user.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
   ],
   providers: [AuthService,
               UserService,
+              RolesService,
               AuthGuard],
   bootstrap: [AppComponent]
 })
