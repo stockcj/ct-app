@@ -15,6 +15,8 @@ import * as firebase from 'firebase/app';
 export class TopToolbarComponent implements OnInit, OnDestroy {
   @Input()
   title: string;
+  @Input()
+  pageTitle: string;
 
   user: User;
 

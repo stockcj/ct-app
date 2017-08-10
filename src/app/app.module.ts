@@ -28,12 +28,25 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserItemComponent } from './users/user-item/user-item.component';
 import { EqualTextValidator} from './users/equal.validator';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminOptionsComponent } from './admin/admin-options/admin-options.component';
+import { ContingencyManagementComponent } from './contingency-management/contingency-management.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'users',
+  { path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['admin']}
+  },
+  { path: 'admin/users',
     component: UsersViewComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['admin']}
+  },
+  { path: 'admin/contingency-management',
+    component: ContingencyManagementComponent,
     canActivate: [AuthGuard],
     data: {roles: ['admin']}
   },
@@ -67,7 +80,10 @@ const appRoutes: Routes = [
     UserCreateComponent,
     UserItemComponent,
     EqualTextValidator,
-    UserProfileComponent
+    UserProfileComponent,
+    AdminComponent,
+    AdminOptionsComponent,
+    ContingencyManagementComponent
   ],
   providers: [AuthService,
               UserService,

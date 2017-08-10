@@ -11,12 +11,18 @@ import { User } from '../user';
       state('all', style({
         transform: 'translateX(0)'
       })),
-      transition('void => all', [
+      transition(':enter', [
         style({
           transform: 'translateX(-100%)'
         }),
-        animate('300ms ease-in')
+        animate('300ms 100ms ease-in')
       ]),
+      transition(':leave', [
+        style({
+          transform: 'translateX(100%)'
+        }),
+        animate('300ms 100ms ease-out')
+      ])
     ])
   ]
 })

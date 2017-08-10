@@ -2,6 +2,11 @@
   <button md-button routerLink="/"><ng-fa name='home' size='2x'></ng-fa>{{title}}</button>
   <span class="toolbar-right"></span>
   <button *ngIf="!user" md-button routerLink="/login">Sign in<ng-fa name='sign-in'></ng-fa></button>
+  <md-toolbar-row>
+    <div class="page-header">
+      <h1>{{pageTitle}}</h1>
+    </div>
+  </md-toolbar-row>
   
   <div *ngIf="user">
     <button md-icon-button [mdMenuTriggerFor]="menu">
@@ -16,10 +21,12 @@
         <ng-fa name="address-card"></ng-fa>
         <span>Profile</span>
       </button>
-      <button md-menu-item routerLink="/users">
-        <ng-fa name="users"></ng-fa>
-        <span>Users</span>
-      </button>
+      <div *ngIf="user.role.name === 'admin'">
+        <button md-menu-item routerLink="/admin">
+          <ng-fa name="cog"></ng-fa>
+          <span>Admin</span>
+        </button>
+      </div>
       <button md-menu-item (click)="logout()">
         <ng-fa name='sign-out'></ng-fa>
         <span>Sign out</span>
