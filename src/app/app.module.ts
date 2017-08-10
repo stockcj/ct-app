@@ -4,7 +4,7 @@ import { AuthGuard } from './auth/auth-guard';
 import { UserService } from './users/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -71,7 +71,9 @@ const appRoutes: Routes = [
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
     MaterialComponents,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,

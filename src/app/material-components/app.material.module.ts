@@ -9,7 +9,8 @@ import { MdDatepickerModule,
          MdSnackBarModule,
          MdMenuModule,
          MdSidenavModule,
-         MdSelectModule } from '@angular/material';
+         MdSelectModule,
+         MdCheckboxModule } from '@angular/material';
 
 @NgModule({
   imports: [MdDatepickerModule,
@@ -22,7 +23,8 @@ import { MdDatepickerModule,
             MdSnackBarModule,
             MdMenuModule,
             MdSidenavModule,
-            MdSelectModule ],
+            MdSelectModule,
+            MdCheckboxModule ],
   exports: [MdDatepickerModule,
             MdRadioModule,
             MdChipsModule,
@@ -33,6 +35,7 @@ import { MdDatepickerModule,
             MdSnackBarModule,
             MdMenuModule,
             MdSidenavModule,
-            MdSelectModule],
+            MdSelectModule,
+            MdCheckboxModule],
 })
 export class MaterialComponents {}

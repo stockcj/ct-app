@@ -22,6 +22,29 @@ export class ExamService {
     return this.db.object('exams/' + $key);
   }
 
+  createExam(exam: Exam): ReplaySubject<any> {
+    const resultSubject = new ReplaySubject(1);
+
+    this.db.list('/exams').push({ name: exam.name })
+      .then(newExam => {
+        for (const component of exam.components) {
+          this.db.list(`/exams/${newExam.key}/components`).push({ name: component});
+        }
+        const updateExamData = {};
+        updateExamData[`exams/${newExam.key}`] = {
+          name: exam.name,
+        };
+        this.db.object('/').update(updateExamData)
+        .then(() => {
+          resultSubject.next(Exam);
+        })
+        .catch(err => {
+          resultSubject.error(err);
+        });
+      });
+    return resultSubject;
+  }
+
   updateExam(exam: Exam) {
     const resultSubject = new ReplaySubject(1);
     if (exam !== undefined && exam.$key !== undefined) {
@@ -37,23 +60,6 @@ export class ExamService {
           resultSubject.error(err);
         });
     }
-    return resultSubject;
-  }
-
-  createExam(exam: Exam): ReplaySubject<any> {
-    const resultSubject = new ReplaySubject(1);
-
-    const updateExamData = {};
-    updateExamData[`exams/`] = {
-      name: exam.name,
-    };
-    this.db.object('/').update(updateExamData)
-    .then(() => {
-      resultSubject.next(Exam);
-    })
-    .catch(err => {
-      resultSubject.error(err);
-    });
     return resultSubject;
   }
 

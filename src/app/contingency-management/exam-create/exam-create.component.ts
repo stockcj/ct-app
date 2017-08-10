@@ -24,12 +24,27 @@ export class ExamCreateComponent implements OnInit {
   @Output()
   createExamEvent = new EventEmitter<Exam>();
 
-  constructor() { }
+  components = ['Reading', 'Reading and Use of English', 'Writing', 'Listening', 'Speaking'];
 
-  ngOnInit() {
+  checkedComponents = [];
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  onChange(component: string, isChecked: boolean) {
+    if (isChecked) {
+      this.checkedComponents.push(component);
+    } else {
+      const index = this.checkedComponents.indexOf(component);
+      if (index > -1) {
+        this.checkedComponents.splice(index, 1);
+      }
+    }
+    this.exam.components = this.checkedComponents;
   }
 
-  creatingNewUser(value) {
+  creatingNewExam(value) {
     this.creatingExam = value;
     this.creatingExamEvent.emit(value);
   }

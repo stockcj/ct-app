@@ -1,6 +1,6 @@
 <form *ngIf="creatingExam" 
       (ngSubmit)="onSubmit(examForm)"
-      #userForm="ngForm"
+      #examForm="ngForm"
       fxFlexFill 
       fxLayout="'row'"
       fxLayoutAlign="center start">
@@ -26,6 +26,16 @@
                 Exam name too short (min. 3 characters)
         </md-error>
       </md-input-container>
+      <div>
+        <label for="components">Components:</label>
+        <div *ngFor="let component of components">
+          <label>
+            <md-checkbox name="components"
+                         (change)="onChange(component, $event.checked)">{{component}}                      
+            </md-checkbox>
+          </label>
+        </div>
+      </div>
     </md-card-content>
     <md-card-actions fxLayoutAlign="end" fxLayout="row">
       <button type="button" 
