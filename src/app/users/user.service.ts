@@ -24,6 +24,26 @@ export class UserService {
     return this.db.object('users/' + $key);
   }
 
+  updateUserProfile(user: User) {
+    const resultSubject = new ReplaySubject(1);
+    if (user !== undefined && user.$key !== undefined) {
+      const dataToUpdate = {};
+      dataToUpdate[`users/${user.$key}/profile/username`] =
+        user.profile.username;
+      dataToUpdate[`users/${user.$key}/profile/displayName`] =
+        user.profile.displayName;
+      this.db.object('/')
+        .update(dataToUpdate)
+        .then(() => {
+          resultSubject.next(user);
+        })
+        .catch(err => {
+          resultSubject.error(err);
+        });
+    }
+    return resultSubject;
+  }
+
   createUser(user: User): ReplaySubject<any> {
     const resultSubject = new ReplaySubject(1);
 

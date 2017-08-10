@@ -27,6 +27,7 @@ import { UsersListComponent } from './users/users-view/users-list.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserItemComponent } from './users/user-item/user-item.component';
 import { EqualTextValidator} from './users/equal.validator';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,10 @@ const appRoutes: Routes = [
     component: UsersViewComponent,
     canActivate: [AuthGuard],
     data: {roles: ['admin']}
+  },
+  { path: 'profile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard]
   },
 ];
 
@@ -61,7 +66,8 @@ const appRoutes: Routes = [
     UsersListComponent,
     UserCreateComponent,
     UserItemComponent,
-    EqualTextValidator
+    EqualTextValidator,
+    UserProfileComponent
   ],
   providers: [AuthService,
               UserService,

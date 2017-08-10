@@ -12,6 +12,14 @@
         <ng-fa name="user"></ng-fa>
         <span>{{user?.profile.displayName}}</span>
       </button>
+      <button md-menu-item routerLink="/profile">
+        <ng-fa name="address-card"></ng-fa>
+        <span>Profile</span>
+      </button>
+      <button md-menu-item routerLink="/users">
+        <ng-fa name="users"></ng-fa>
+        <span>Users</span>
+      </button>
       <button md-menu-item (click)="logout()">
         <ng-fa name='sign-out'></ng-fa>
         <span>Sign out</span>

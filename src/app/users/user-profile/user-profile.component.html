@@ -1,0 +1,55 @@
+<ct-top-toolbar [title]="'Contingency Tracker - Profile'"></ct-top-toolbar>
+<form (ngSubmit)="onSubmit(userProfileForm)"
+      #userProfileForm="ngForm"
+      fxFlexFill 
+      fxLayout="'row'"
+      fxLayoutAlign="center start">
+  <md-card fxFlex="450px">
+    <md-card-content fxFill fxLayout="column">
+      <h3><ng-fa name="address-card"></ng-fa> Update User profile</h3>
+      <md-error [ngStyle]="{'padding-bottom': '15px'}">
+                {{error}}
+      </md-error>
+      <md-input-container>
+        <input mdInput
+              fxFlex="100"
+              required
+              minlength="3"
+              placeholder="Username"
+              [(ngModel)]="user.profile.username"
+              name="username"
+              #username="ngModel">
+        <md-error *ngIf="!username.errors?.minlength">
+                Username required
+        </md-error>
+        <md-error *ngIf="username.errors?.minlength">
+                Username too short (min. 3 characters)
+        </md-error>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput
+              fxFlex="100"
+              required
+              minlength="3"
+              placeholder="Display name"
+              [(ngModel)]="user.profile.displayName"
+              name="displayName"
+              #displayName="ngModel">
+        <md-error *ngIf="!displayName.errors?.minlength">
+                Display name required
+        </md-error>
+        <md-error *ngIf="displayName.errors?.minlength">
+                Display name too short (min. 3 characters)
+        </md-error>
+      </md-input-container>
+    </md-card-content>
+    <md-card-actions fxLayoutAlign="end" fxLayout="row">
+      <button type="submit" 
+              md-icon-button 
+              color="primary"
+              [disabled]="!userProfileForm.form.valid || !profileIsChanged()">
+        <ng-fa name="floppy-o"></ng-fa>
+      </button>
+    </md-card-actions>
+  </md-card>
+</form>

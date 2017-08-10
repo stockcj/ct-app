@@ -1,12 +1,12 @@
+import { Component, OnInit, Input} from '@angular/core';
 import { UserService } from './../user.service';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../user';
 
 @Component({
   selector: 'ct-users-list',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.css']
+  styleUrls: ['./users-list.component.css'],
 })
 export class UsersListComponent implements OnInit {
 
