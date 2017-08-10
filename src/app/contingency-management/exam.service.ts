@@ -27,14 +27,16 @@ export class ExamService {
 
     this.db.list('/exams').push({ name: exam.name })
       .then(newExam => {
-        for (const component of exam.components) {
-          this.db.list(`/exams/${newExam.key}/components`).push({ name: component});
-        }
         const updateExamData = {};
         updateExamData[`exams/${newExam.key}`] = {
           name: exam.name,
         };
         this.db.object('/').update(updateExamData)
+        .then(() => {
+          for (const component of exam.components) {
+               this.db.list(`/exams/${newExam.key}/components`).push({name: component});
+          }
+        })
         .then(() => {
           resultSubject.next(Exam);
         })

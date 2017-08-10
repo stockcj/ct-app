@@ -24,7 +24,7 @@ export class ExamCreateComponent implements OnInit {
   @Output()
   createExamEvent = new EventEmitter<Exam>();
 
-  components = ['Reading', 'Reading and Use of English', 'Writing', 'Listening', 'Speaking'];
+  components = ['Reading', 'Reading and Use of English', 'Reading and Writing', 'Writing', 'Listening', 'Speaking'];
 
   checkedComponents = [];
 
