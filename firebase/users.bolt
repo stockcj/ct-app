@@ -26,6 +26,11 @@ path /users {
   write() { isAdmin() }
 }
 
+path /exams {
+  read() { isAdmin() }
+  write() { isAdmin() }
+}
+
 path /users/{uid} {
   read() { isOwner(auth, uid) }
   write() { isAdmin() }

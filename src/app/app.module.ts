@@ -1,3 +1,4 @@
+import { ExamService } from './contingency-management/exam.service';
 import { RolesService } from './users/roles/roles.service';
 import { AuthGuard } from './auth/auth-guard';
 import { UserService } from './users/user.service';
@@ -31,6 +32,9 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { AdminComponent } from './admin/admin.component';
 import { AdminOptionsComponent } from './admin/admin-options/admin-options.component';
 import { ContingencyManagementComponent } from './contingency-management/contingency-management.component';
+import { ExamListComponent } from './contingency-management/exam-list/exam-list.component';
+import { ExamItemComponent } from './contingency-management/exam-item/exam-item.component';
+import { ExamCreateComponent } from './contingency-management/exam-create/exam-create.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -83,12 +87,16 @@ const appRoutes: Routes = [
     UserProfileComponent,
     AdminComponent,
     AdminOptionsComponent,
-    ContingencyManagementComponent
+    ContingencyManagementComponent,
+    ExamListComponent,
+    ExamItemComponent,
+    ExamCreateComponent
   ],
   providers: [AuthService,
               UserService,
               RolesService,
-              AuthGuard],
+              AuthGuard,
+              ExamService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

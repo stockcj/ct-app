@@ -1,0 +1,28 @@
+<md-card>
+  <md-card-content fxLayout="row">
+    <div fxFlex="4em"><ng-fa name="pencil" size="4x"></ng-fa></div>
+    <div fxFlex>
+      <h1>{{exam?.name}}</h1>
+    </div>
+    <div *ngIf="!validateDelete" fxFlex="3em" fxFlexAlign="end" fxLayout="column">
+      <button color="primary" md-icon-button>
+        <ng-fa name="info"></ng-fa>
+      </button>
+      <button color="accent" md-icon-button>
+        <ng-fa name="edit"></ng-fa>
+      </button>
+      <button color="warn" md-icon-button (click)="deleteValidation(true)">
+        <ng-fa name="trash"></ng-fa>
+      </button>
+    </div>
+    <div *ngIf="validateDelete" fxFlex="3em" fxFlexAlign="end" fxLayout="column">
+      <h4>Delete?</h4>
+      <button color="primary" md-icon-button (click)="delete()">
+        <ng-fa name="check"></ng-fa>
+      </button>
+      <button color="warn" md-icon-button (click)="deleteValidation(false)">
+        <ng-fa name="times"></ng-fa>
+      </button>
+    </div>
+  </md-card-content>
+</md-card>

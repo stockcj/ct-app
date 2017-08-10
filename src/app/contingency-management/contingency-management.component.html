@@ -1,1 +1,8 @@
 <ct-top-toolbar [title]="'Contingency Tracker'" [pageTitle]="'Contingency Management'"></ct-top-toolbar>
+<ct-exam-create 
+  [creatingExam]="creatingExam"
+  [exam]="exam"
+  [error]="error"
+  (creatingExamEvent)="creatingExamEvent($event)" 
+  (createExamEvent)="createExamEvent($event)"></ct-exam-create>
+<ct-exam-list [exams]="exams"></ct-exam-list>
