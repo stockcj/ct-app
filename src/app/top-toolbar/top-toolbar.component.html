@@ -1,37 +1,50 @@
-<md-toolbar color="primary">
-  <button md-button routerLink="/"><ng-fa name='home' size='2x'></ng-fa>{{title}}</button>
-  <span class="toolbar-right"></span>
-  <button *ngIf="!user" md-button routerLink="/login">Sign in<ng-fa name='sign-in'></ng-fa></button>
-  <md-toolbar-row>
-    <div class="page-header">
-      <h1>{{pageTitle}}</h1>
+<div class="container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="button is-large is-white" routerLink="/">{{title}}</a>
     </div>
-  </md-toolbar-row>
-  
-  <div *ngIf="user">
-    <button md-icon-button [mdMenuTriggerFor]="menu">
-      <ng-fa name="ellipsis-v"></ng-fa>
-    </button>
-    <md-menu #menu="mdMenu">
-      <button md-menu-item disabled="true">
-        <ng-fa name="user"></ng-fa>
-        <span>{{user?.profile.displayName}}</span>
-      </button>
-      <button md-menu-item routerLink="/profile">
-        <ng-fa name="address-card"></ng-fa>
-        <span>Profile</span>
-      </button>
-      <div *ngIf="user.role.name === 'admin'">
-        <button md-menu-item routerLink="/admin">
-          <ng-fa name="cog"></ng-fa>
-          <span>Admin</span>
-        </button>
-      </div>
-      <button md-menu-item (click)="logout()">
-        <ng-fa name='sign-out'></ng-fa>
-        <span>Sign out</span>
-      </button>
-    </md-menu>
-  </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a class="button is-large is-white" *ngIf="!user" routerLink="/login">
+          <p>Sign in</p>
+          <ng-fa class="icon" name='sign-in'></ng-fa>
+        </a>
 
-</md-toolbar>
+        <div *ngIf="user">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="button is-large is-white">
+              <ng-fa class="icon icon-is-large" name="ellipsis-v"></ng-fa>
+            </a>
+            <div class="navbar-dropdown is-right">
+              <p class="navbar-item">
+                {{user?.profile.displayName}}
+              </p>
+              <hr class="navbar-divider">
+              <a class="navbar-item" routerLink="/profile">
+                <ng-fa class="icon" name="user-circle-o"></ng-fa>
+                <p>Profile</p>
+              </a>
+              <a class="navbar-item" *ngIf="user.role.name === 'admin'" routerLink="/admin">
+                <ng-fa class="icon" name="cog"></ng-fa>
+                <p>Admin</p>
+              </a>
+              <a class="navbar-item" (click)="logout()">
+                <ng-fa class="icon" name='sign-out'></ng-fa>
+                <p>Sign out</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <p class="title">
+        {{pageTitle}}
+      </p>
+    </div>
+  </div>
+</section>

@@ -3,8 +3,8 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../users/user';
 import { Router } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
+import { MdSnackBar } from '@angular/material';
 import * as firebase from 'firebase/app';
 
 @Component({

@@ -1,30 +1,47 @@
-<button class="back-button" md-mini-fab routerLink="/"><ng-fa name="arrow-left"></ng-fa></button>
-<div fxFlexFill [fxLayout]="row" fxLayoutAlign="center center">
-  <md-card class="login-area">
-    <ng-fa name="lock"></ng-fa> Login
-    <p class="sign-in-error" *ngIf="signInError && signInError.length > 0"><ng-fa name="exclamation-circle"></ng-fa>
-      {{signInError}}
-    </p>
-    <form (ngSubmit)="tryLogin($event)">
-    <md-card-content>
-      <md-input-container class="full-width">
-        <input mdInput 
-               placeholder="Email"
-               name="userEmail"
-               [(ngModel)]="user.email">
-      </md-input-container>
-      <md-input-container class="full-width">
-        <input mdInput 
-               placeholder="Password"
-               name="password"
-               type="password"
-               [(ngModel)]="user.password">
-      </md-input-container>
-    </md-card-content>
-    <md-card-actions class="button-row">
-      <button type="button" class="login-button" md-button>Lost password</button>
-      <button type="submit" [disabled]="disableButton" md-raised-button color="primary">{{buttonText}}</button>
-    </md-card-actions>
-    </form>
-  </md-card>
-</div>
+<section class="section">
+  <div class="container">
+    <button class="button" md-mini-fab routerLink="/"><ng-fa name="arrow-left"></ng-fa></button>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <div class="card">
+          <header class="card-header">
+            <div class="card-header-icon">
+              <ng-fa name="lock"></ng-fa>
+            </div>
+            <p class="card-header-title">
+              Login
+            </p>
+          </header>
+          <form (ngSubmit)="tryLogin($event)">
+            <div class="card-content">
+              <p class="sign-in-error" *ngIf="signInError && signInError.length > 0">
+                <ng-fa name="exclamation-circle"></ng-fa>
+                {{signInError}}
+              </p>
+              <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left">
+                  <input class="input" name="userEmail" [(ngModel)]="user.email">
+                  <ng-fa class="icon is-left" name="envelope"></ng-fa>
+                </div>
+                <label class="label">Password</label>
+                <div class="control has-icons-left">
+                  <input class="input" name="password" type="password" [(ngModel)]="user.password">
+                  <ng-fa class="icon is-left" name="key"></ng-fa>
+                </div>
+              </div>
+            </div>
+                <div class="card-footer">
+                  <div class="control card-footer-item">
+                    <button type="button" class="button is-link">Lost password</button>
+                  </div>
+                  <div class="control card-footer-item">
+                    <button type="submit" class="button is-medium is-primary" [disabled]="disableButton">{{buttonText}}</button>
+                  </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
