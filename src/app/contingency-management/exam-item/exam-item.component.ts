@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Exam } from '../exam';
+import { ExamComponent} from '../examcomponent';
 
 @Component({
   selector: 'ct-exam-item',
