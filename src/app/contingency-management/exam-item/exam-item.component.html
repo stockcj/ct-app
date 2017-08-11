@@ -1,12 +1,14 @@
 <div>
   <div class="card">
-    <div class="card-content">
+    <div class="exam-card-content card-content">
       <p class="title">{{exam?.name}}</p>
+        <div *ngFor='let component of exam.components | values:"key":true'>
+          <p>{{component.name}}</p>
+        </div>
     </div>
 
     <footer class="card-footer" *ngIf="!validateDelete">
-      <a class="button is-inverted card-footer-item is-info">Info</a>
-      <a class="button is-inverted card-footer-item is-success">Edit</a>
+      <a class="button is-inverted card-footer-item is-info" (click)="onSelect(exam)">Edit</a>
       <a class="button is-inverted card-footer-item is-danger" (click)="deleteValidation(true)">Delete</a>
     </footer>
     <footer *ngIf="validateDelete" class="card-footer">

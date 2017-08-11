@@ -1,5 +1,6 @@
 import { Version } from './version';
 export class ExamComponent {
-  name: String;
+  $key: string;
+  name: string;
   versions: [Version];
 }

@@ -35,6 +35,7 @@ import { ContingencyManagementComponent } from './contingency-management/conting
 import { ExamListComponent } from './contingency-management/exam-list/exam-list.component';
 import { ExamItemComponent } from './contingency-management/exam-item/exam-item.component';
 import { ExamCreateComponent } from './contingency-management/exam-create/exam-create.component';
+import { ValuesPipe } from './pipes/custom-pipes.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
     ContingencyManagementComponent,
     ExamListComponent,
     ExamItemComponent,
-    ExamCreateComponent
+    ExamCreateComponent,
+    ValuesPipe
   ],
   providers: [AuthService,
               UserService,

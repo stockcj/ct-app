@@ -7,6 +7,7 @@ import { ExamComponent} from '../examcomponent';
   templateUrl: './exam-item.component.html',
   styleUrls: ['./exam-item.component.css']
 })
+
 export class ExamItemComponent implements OnInit {
 
   @Input()
@@ -15,11 +16,22 @@ export class ExamItemComponent implements OnInit {
   @Output()
   deleteExamEvent = new EventEmitter<Exam>();
 
+  selectedExam: Exam;
   validateDelete: boolean;
 
-  constructor() { }
+  public arrayofKeys;
+
+  @Input()
+  examComponents: Array<ExamComponent>;
+
+  constructor() {
+   }
 
   ngOnInit() {
+  }
+
+  onSelect(exam: Exam) {
+    this.selectedExam = exam;
   }
 
   deleteValidation(value: boolean) {

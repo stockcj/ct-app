@@ -52,6 +52,8 @@ export class ExamCreateComponent implements OnInit {
   onSubmit(userForm) {
     if (userForm.form.valid) {
       this.createExamEvent.emit(this.exam);
+      this.checkedComponents = [];
+      this.clear();
     }
   }
 
