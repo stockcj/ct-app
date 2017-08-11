@@ -1,3 +1,7 @@
-<div fxLayout="row" fxLayoutWrap>
-  <ct-user-item fxFlex="50" *ngFor="let user of users | async" [user]=user (deleteUserEvent)="deleteUser($event)"></ct-user-item>
-</div>
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+     <ct-user-item class="column is-one-third" *ngFor="let user of users | async" [user]=user (deleteUserEvent)="deleteUser($event)"></ct-user-item>
+    </div>
+  </div>
+</section>

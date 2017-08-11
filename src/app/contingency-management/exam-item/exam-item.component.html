@@ -1,28 +1,17 @@
-<md-card>
-  <md-card-content fxLayout="row">
-    <div fxFlex="4em"><ng-fa name="pencil" size="3x"></ng-fa></div>
-    <div fxFlex>
-      <h1>{{exam?.name}}</h1>
+<div>
+  <div class="card">
+    <div class="card-content">
+      <p class="title">{{exam?.name}}</p>
     </div>
-    <div *ngIf="!validateDelete" fxFlex="3em" fxFlexAlign="end" fxLayout="column">
-      <button color="primary" md-icon-button>
-        <ng-fa name="info"></ng-fa>
-      </button>
-      <button color="accent" md-icon-button>
-        <ng-fa name="edit"></ng-fa>
-      </button>
-      <button color="warn" md-icon-button (click)="deleteValidation(true)">
-        <ng-fa name="trash"></ng-fa>
-      </button>
-    </div>
-    <div *ngIf="validateDelete" fxFlex="3em" fxFlexAlign="end" fxLayout="column">
-      <h4>Delete?</h4>
-      <button color="primary" md-icon-button (click)="delete()">
-        <ng-fa name="check"></ng-fa>
-      </button>
-      <button color="warn" md-icon-button (click)="deleteValidation(false)">
-        <ng-fa name="times"></ng-fa>
-      </button>
-    </div>
-  </md-card-content>
-</md-card>
+
+    <footer class="card-footer" *ngIf="!validateDelete">
+      <a class="button is-inverted card-footer-item is-info">Info</a>
+      <a class="button is-inverted card-footer-item is-success">Edit</a>
+      <a class="button is-inverted card-footer-item is-danger" (click)="deleteValidation(true)">Delete</a>
+    </footer>
+    <footer *ngIf="validateDelete" class="card-footer">
+      <a class="button is-inverted card-footer-item is-success" (click)="delete()">Yes</a>
+      <a class="button is-inverted card-footer-item is-danger" (click)="deleteValidation(false)">No</a>
+    </footer>
+  </div>
+</div>

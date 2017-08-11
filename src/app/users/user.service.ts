@@ -1,3 +1,4 @@
+import { MdSnackBar } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -14,7 +15,8 @@ export class UserService {
 
   app;
   constructor(private db: AngularFireDatabase,
-              private afAuth: AngularFireAuth ) { }
+              private afAuth: AngularFireAuth,
+              public userCreationValidationBar: MdSnackBar ) { }
 
   getUsers(): FirebaseListObservable<User[]> {
     return this.db.list('users');
@@ -75,6 +77,11 @@ export class UserService {
      })
      .catch(err => {
        resultSubject.error(err);
+     })
+     .then(() => {
+        this.userCreationValidationBar.open('New user created', 'Ok', {
+          duration: 2000,
+        });
      });
     return resultSubject;
   }
@@ -91,6 +98,11 @@ export class UserService {
         })
         .catch(err => {
           resultSubject.error(err);
+        })
+        .then(() => {
+          this.userCreationValidationBar.open('User deleted', 'Ok', {
+            duration: 2000,
+          });
         });
     }
     return resultSubject;

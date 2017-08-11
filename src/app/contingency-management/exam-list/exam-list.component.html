@@ -1,3 +1,7 @@
-<div fxLayout="row" fxLayoutWrap>
-  <ct-exam-item fxFlex="25" *ngFor="let exam of exams | async" [exam]=exam (deleteExamEvent)="deleteExam($event)"></ct-exam-item>
-</div>
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <ct-exam-item class="column is-one-third" *ngFor="let exam of exams | async" [exam]=exam (deleteExamEvent)="deleteExam($event)"></ct-exam-item>
+    </div>
+  </div>
+</section>

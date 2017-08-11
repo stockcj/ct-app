@@ -1,18 +1,30 @@
-<div fxLayout="row" fxLayoutWrap>
-  <md-card fxFlex="25" routerLink="/admin/users">
-    <md-card-content fxLayout="row" fxFlexAlign="center">
-      <div fxFlex="4em"><ng-fa name="user" size="4x"></ng-fa></div>
-      <div fxFlex>
-        <h1>Users</h1>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <div class="card" routerLink="/admin/users">
+          <div class="card-content">
+            <div class="level">
+              <div class="level-item has-text-centered">
+                <ng-fa class="icon is-large" name="user" size="4x"></ng-fa>
+                <h1>Users</h1>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </md-card-content>
-  </md-card>
-  <md-card fxFlex="25" routerLink="/admin/contingency-management">
-    <md-card-content fxLayout="row" fxFlexAlign="center">
-      <div fxFlex="4em"><ng-fa name="book" size="4x"></ng-fa></div>
-      <div fxFlex>
-        <h1>Contingency Versions</h1>
+      <div class="column is-one-quarter">
+        <div class="card" routerLink="/admin/contingency-management">
+          <div class="card-content">
+            <div class="level">
+              <div class="level-item has-text-centered">
+                <ng-fa class="icon is-large" name="book" size="4x"></ng-fa>
+                <h1>Contingency Versions</h1>
+              </div>    
+            </div>
+          </div>
+        </div>
       </div>
-    </md-card-content>
-  </md-card>
-</div>
+    </div>
+  </div>
+</section>

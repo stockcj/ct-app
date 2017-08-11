@@ -1,4 +1,4 @@
-md-card:hover {
+.card:hover {
   cursor: pointer;
   background-color: #f8f8f8;
 }
