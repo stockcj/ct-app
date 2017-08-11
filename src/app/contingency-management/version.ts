@@ -1,4 +1,4 @@
 export class Version {
-  name: String;
-  active: Boolean;
+  name: string;
+  active: boolean;
 }
