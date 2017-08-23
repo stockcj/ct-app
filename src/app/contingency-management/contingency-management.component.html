@@ -5,4 +5,9 @@
   [error]="error"
   (creatingExamEvent)="creatingExamEvent($event)" 
   (createExamEvent)="createExamEvent($event)"></ct-exam-create>
+<ct-exam-update
+  [updatingExam]="updatingExam"
+  [exam]="exam"
+  [error]="error"
+  [updatingExamEvent]="updatingExamEvent($event)"></ct-exam-update>
 <ct-exam-list *ngIf="!creatingExam" [exams]="exams"></ct-exam-list>

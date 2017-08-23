@@ -1,5 +1,6 @@
 <section class="section">
   <div class="container">
+    <!--
     <form *ngIf="creatingExam" (ngSubmit)="onSubmit(examForm)" #examForm="ngForm" fxFlexFill fxLayout="'row'" fxLayoutAlign="center start">
       <md-card fxFlex="450px">
         <md-card-content fxFill fxLayout="column">
@@ -38,11 +39,107 @@
         </md-card-actions>
       </md-card>
     </form>
+  -->
     <div *ngIf="!creatingExam">
       <a class="add-exam button is-medium is-primary" (click)="creatingNewExam(true)">
         <ng-fa class="icon" name="plus"></ng-fa>
         <span>Add Exam</span>
       </a>
+    </div>
+    <div *ngIf="creatingExam" class="columns is-centered">
+      <div class="column is-6">
+        <div class="card">
+          <header class="card-header">
+            <div class="card-header-icon">
+              <ng-fa name="plus"></ng-fa>
+            </div>
+            <p class="card-header-title">
+              Add Exam
+            </p>
+          </header>
+          <form [formGroup]="examForm" (ngSubmit)="onSubmit(examForm)" novalidate>
+            <div class="card-content">
+              <div class="field">
+                <label class="label">Name</label>
+                <input formControlName="examName" class="input">
+              </div>
+            </div>
+            <div class="card-content">
+              <div formArrayName="examComponents">
+                <div *ngFor="let component of examComponents.controls; let i=index" [formGroupName]="i">
+                  <div class="level">
+                    <div class="level-left">
+                      <div class="level-item">
+                        <p class="title is-5">Component #{{i + 1}}</p>
+                      </div>
+                    </div>
+                    <div class="level-right">
+                      <div class="level-item">
+                        <button class="delete" *ngIf="examComponents.controls.length > 1" (click)="removeComponent(i)"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-content">
+                    <div class="field">
+                      <label class="label">Component Name</label>
+                      <div class="select">
+                        <select formControlName="name">
+                          <option *ngFor="let item of componentArray" [value]="item">{{item}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <div formArrayName="versions">
+                        <div *ngFor="let eachItem of component.get('versions').controls; let t=index" [formGroupName]="t">
+                          <div class="card-content">
+                              <div class="level">
+                                  <div class="level-left">
+                                    <div class="level-item">
+                                      <p class="title is-6">Version #{{t + 1}}</p>
+                                    </div>
+                                  </div>
+                                  <div class="level-right">
+                                    <div class="level-item">
+                                      <button class="delete" *ngIf="component.get('versions').controls.length > 1" (click)="removeVersion(i, t)"></button>
+                                    </div>
+                                  </div>
+                              </div>
+                            <div class="field">
+                              <div class="control">
+                                <input formControlName="name" class="input" placeholder="Version name">
+                              </div>
+                            </div>
+                            <div class="field">
+                              <label class="radio"><input formControlName="active" type="radio" value="true">Active</label>
+                              <label class="radio"><input formControlName="active" type="radio" value="false">Inactive</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="field">
+                        <button class="button is-primary is-small" (click)="addVersion(i, t)" type="button">Add a version</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button class="button is-primary" (click)="addComponent()" type="button">Add a component</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="control card-footer-item">
+                <button type="button" class="button is-link" (click)="creatingNewExam(false)">Cancel</button>
+              </div>
+              <div class="control card-footer-item">
+                <button type="submit" class="button is-medium is-primary" [disabled]="!examForm.valid">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <p>Form value: {{ examForm.value | json }}</p>
+        <p>Form status: {{ examForm.status | json }}</p>
+      </div>
     </div>
   </div>
 </section>

@@ -35,7 +35,12 @@ export class ExamService {
         this.db.object('/').update(updateExamData)
         .then(() => {
           for (const component of exam.components) {
-               this.db.list(`/exams/${newExam.key}/components`).push({name: component});
+               this.db.list(`/exams/${newExam.key}/components`).push({name: component.name})
+               .then(newComponent => {
+                  for (const version of component.versions) {
+                    this.db.list(`/exams/${newExam.key}/components/${newComponent.key}/versions`).push(version);
+                  }
+               });
           }
         })
         .then(() => {

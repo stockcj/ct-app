@@ -14,6 +14,7 @@ export class ContingencyManagementComponent implements OnInit {
   exams: Observable<Exam[]>;
 
   creatingExam: boolean;
+  updatingExam: boolean;
   exam: Exam;
   error: string;
 
@@ -26,6 +27,10 @@ export class ContingencyManagementComponent implements OnInit {
 
   creatingExamEvent(value) {
     this.creatingExam = value;
+  }
+
+  updatingExamEvent(value) {
+    this.updatingExam = value;
   }
 
   createExamEvent(exam) {

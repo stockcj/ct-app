@@ -6,26 +6,24 @@ import { ExamComponent } from './../examcomponent';
 import { Version } from './../version';
 
 @Component({
-  selector: 'ct-exam-create',
-  templateUrl: './exam-create.component.html',
-  styleUrls: ['./exam-create.component.css']
+  selector: 'ct-exam-update',
+  templateUrl: './exam-update.component.html',
+  styleUrls: ['./exam-update.component.css']
 })
-export class ExamCreateComponent implements OnInit {
+export class ExamUpdateComponent implements OnInit {
 
   @Input()
-  creatingExam: boolean;
+  updatingExam: boolean;
   @Input()
   exam: Exam;
   @Input()
   error: string;
 
   @Output()
-  creatingExamEvent = new EventEmitter<boolean>();
+  updatingExamEvent = new EventEmitter<boolean>();
 
   @Output()
-  createExamEvent = new EventEmitter<Exam>();
-
-  checkedComponents = [];
+  updateExamEvent = new EventEmitter<Exam>();
 
   examForm: FormGroup;
   examComponent: FormArray;
@@ -86,37 +84,15 @@ export class ExamCreateComponent implements OnInit {
 
   ngOnInit() {}
 
-  onChange(component: string, isChecked: boolean) {
-    if (isChecked) {
-      this.checkedComponents.push(component);
-    } else {
-      const index = this.checkedComponents.indexOf(component);
-      if (index > -1) {
-        this.checkedComponents.splice(index, 1);
-      }
-    }
-    this.exam.components = this.checkedComponents;
+  updatingExistingExam(value) {
+    this.updatingExam = value;
+    this.updatingExamEvent.emit(value);
   }
-
-  creatingNewExam(value) {
-    this.creatingExam = value;
-    this.creatingExamEvent.emit(value);
-  }
-
-  /*
-  onSubmit(examForm) {
-    console.log(this.exam);
-      this.createExamEvent.emit(this.exam);
-      this.checkedComponents = [];
-      this.clear();
-    }
-  }
-  */
 
   onSubmit() {
     this.exam = this.prepareSaveExam();
     console.log(this.exam);
-    this.createExamEvent.emit(this.exam);
+    this.updateExamEvent.emit(this.exam);
     this.clear();
   }
 
@@ -141,4 +117,3 @@ export class ExamCreateComponent implements OnInit {
     this.examForm.reset({});
   }
 }
-

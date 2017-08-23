@@ -8,7 +8,7 @@
     </div>
 
     <footer class="card-footer" *ngIf="!validateDelete">
-      <a class="button is-inverted card-footer-item is-info" (click)="onSelect(exam)">Edit</a>
+      <a class="button is-inverted card-footer-item is-info" (click)="creatingNewExam(true)">Edit</a>
       <a class="button is-inverted card-footer-item is-danger" (click)="deleteValidation(true)">Delete</a>
     </footer>
     <footer *ngIf="validateDelete" class="card-footer">
