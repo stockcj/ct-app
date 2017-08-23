@@ -15,6 +15,8 @@ export class ExamCreateComponent implements OnInit {
   @Input()
   creatingExam: boolean;
   @Input()
+  updatingExam: boolean;
+  @Input()
   exam: Exam;
   @Input()
   error: string;
@@ -24,8 +26,6 @@ export class ExamCreateComponent implements OnInit {
 
   @Output()
   createExamEvent = new EventEmitter<Exam>();
-
-  checkedComponents = [];
 
   examForm: FormGroup;
   examComponent: FormArray;
@@ -86,32 +86,10 @@ export class ExamCreateComponent implements OnInit {
 
   ngOnInit() {}
 
-  onChange(component: string, isChecked: boolean) {
-    if (isChecked) {
-      this.checkedComponents.push(component);
-    } else {
-      const index = this.checkedComponents.indexOf(component);
-      if (index > -1) {
-        this.checkedComponents.splice(index, 1);
-      }
-    }
-    this.exam.components = this.checkedComponents;
-  }
-
   creatingNewExam(value) {
     this.creatingExam = value;
     this.creatingExamEvent.emit(value);
   }
-
-  /*
-  onSubmit(examForm) {
-    console.log(this.exam);
-      this.createExamEvent.emit(this.exam);
-      this.checkedComponents = [];
-      this.clear();
-    }
-  }
-  */
 
   onSubmit() {
     this.exam = this.prepareSaveExam();

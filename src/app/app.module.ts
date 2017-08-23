@@ -56,6 +56,11 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: ['admin']}
   },
+  { path: 'admin/contingency-management/:key',
+    component: ExamUpdateComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['admin']}
+  },
   { path: 'profile',
     component: UserProfileComponent,
     canActivate: [AuthGuard]

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Exam } from '../exam';
 import { ExamComponent} from '../examcomponent';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'ct-exam-item',
@@ -24,14 +25,15 @@ export class ExamItemComponent implements OnInit {
   @Input()
   examComponents: Array<ExamComponent>;
 
-  constructor() {
+  constructor( private router: Router) {
    }
 
   ngOnInit() {
   }
 
   onSelect(exam: Exam) {
-    this.selectedExam = exam;
+    console.log('/' + exam.$key);
+    this.router.navigate(['/admin/contingency-management', exam.$key]);
   }
 
   deleteValidation(value: boolean) {

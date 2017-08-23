@@ -1,46 +1,6 @@
 <section class="section">
   <div class="container">
-    <!--
-    <form *ngIf="creatingExam" (ngSubmit)="onSubmit(examForm)" #examForm="ngForm" fxFlexFill fxLayout="'row'" fxLayoutAlign="center start">
-      <md-card fxFlex="450px">
-        <md-card-content fxFill fxLayout="column">
-          <h3>
-            <ng-fa name="pencil"></ng-fa> Add Exam</h3>
-          <md-error [ngStyle]="{'padding-bottom': '15px'}">
-            {{error}}
-          </md-error>
-          <md-input-container>
-            <input mdInput fxFlex="100" required minlength="3" placeholder="Exam name" [(ngModel)]="exam.name" name="examname" #examname="ngModel">
-            <md-error *ngIf="!examname.errors?.minlength">
-              Exam name required
-            </md-error>
-            <md-error *ngIf="examname.errors?.minlength">
-              Exam name too short (min. 3 characters)
-            </md-error>
-          </md-input-container>
-          <div>
-            <label for="components">Components:</label>
-            <div *ngFor="let component of components">
-              <label>
-            <md-checkbox name="components"
-                         (change)="onChange(component, $event.checked)">{{component}}                      
-            </md-checkbox>
-          </label>
-            </div>
-          </div>
-        </md-card-content>
-        <md-card-actions fxLayoutAlign="end" fxLayout="row">
-          <button type="button" md-icon-button color="warn" (click)="creatingNewExam(false)">
-        <ng-fa name="ban"></ng-fa>
-      </button>
-          <button type="submit" md-icon-button color="primary" [disabled]="!examForm.form.valid">
-        <ng-fa name="floppy-o"></ng-fa>
-      </button>
-        </md-card-actions>
-      </md-card>
-    </form>
-  -->
-    <div *ngIf="!creatingExam">
+    <div *ngIf="!creatingExam || !updatingExam">
       <a class="add-exam button is-medium is-primary" (click)="creatingNewExam(true)">
         <ng-fa class="icon" name="plus"></ng-fa>
         <span>Add Exam</span>

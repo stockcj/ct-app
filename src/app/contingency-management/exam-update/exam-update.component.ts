@@ -1,9 +1,13 @@
 import { Subscription, Observable } from 'rxjs';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ExamService } from './../exam.service';
 import { Exam } from '../exam';
 import { ExamComponent } from './../examcomponent';
 import { Version } from './../version';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'ct-exam-update',
@@ -13,24 +17,38 @@ import { Version } from './../version';
 export class ExamUpdateComponent implements OnInit {
 
   @Input()
-  updatingExam: boolean;
-  @Input()
   exam: Exam;
-  @Input()
+
   error: string;
-
-  @Output()
-  updatingExamEvent = new EventEmitter<boolean>();
-
-  @Output()
-  updateExamEvent = new EventEmitter<Exam>();
 
   examForm: FormGroup;
   examComponent: FormArray;
   componentArray = ['Reading', 'Reading and Use of English', 'Reading and Writing', 'Writing', 'Listening', 'Speaking'];
 
-  constructor(private fb: FormBuilder) {
-    this.createForm();
+
+  constructor(
+    private fb: FormBuilder,
+    private examService: ExamService,
+    private route: ActivatedRoute) {
+      this.createForm();
+  }
+
+  ngOnInit() {
+    const key = this.route.snapshot.paramMap.get('key');
+    const sub = this.examService.getExam(key).subscribe(exam => {
+      this.exam = exam;
+      this.examForm.reset({
+        examName: this.exam.name,
+      });
+      console.log('oninit', this.exam.components);
+      this.setComponents(this.exam.components);
+    });
+  }
+
+  setComponents(components: ExamComponent[]) {
+    const componentFGs = components.map(component => this.fb.group(component));
+    const componentFormArray = this.fb.array(componentFGs);
+    this.examForm.setControl('examComponents', componentFormArray);
   }
 
   createForm() {
@@ -82,17 +100,9 @@ export class ExamUpdateComponent implements OnInit {
     return this.examForm.get('versions') as FormArray;
   }
 
-  ngOnInit() {}
-
-  updatingExistingExam(value) {
-    this.updatingExam = value;
-    this.updatingExamEvent.emit(value);
-  }
-
   onSubmit() {
     this.exam = this.prepareSaveExam();
     console.log(this.exam);
-    this.updateExamEvent.emit(this.exam);
     this.clear();
   }
 

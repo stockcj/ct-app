@@ -19,7 +19,7 @@ export class ExamService {
     return this.db.list('exams');
   }
 
-  getExam($key: string): FirebaseObjectObservable<Exam[]> {
+  getExam($key: string): FirebaseObjectObservable<Exam> {
     return this.db.object('exams/' + $key);
   }
 
