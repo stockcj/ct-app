@@ -42,18 +42,15 @@ export class ExamUpdateComponent implements OnInit {
       this.examForm.reset({
         examName: this.exam.name,
       });
-      // console.log('oninit', this.exam.components);
-      // this.setComponents(this.exam.components);
+      this.setComponents(this.exam.components);
     });
   }
 
-  /*
   setComponents(components: ExamComponent[]) {
     const componentFGs = components.map(component => this.fb.group(component));
     const componentFormArray = this.fb.array(componentFGs);
     this.examForm.setControl('examComponents', componentFormArray);
   }
-  */
 
   createForm() {
     this.examForm = this.fb.group({
