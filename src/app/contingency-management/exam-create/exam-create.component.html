@@ -1,6 +1,6 @@
 <section class="section">
   <div class="container">
-    <div *ngIf="!creatingExam || !updatingExam">
+    <div *ngIf="!creatingExam">
       <a class="add-exam button is-medium is-primary" (click)="creatingNewExam(true)">
         <ng-fa class="icon" name="plus"></ng-fa>
         <span>Add Exam</span>

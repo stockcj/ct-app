@@ -32,7 +32,6 @@ export class ExamItemComponent implements OnInit {
   }
 
   onSelect(exam: Exam) {
-    console.log('/' + exam.$key);
     this.router.navigate(['/admin/contingency-management', exam.$key]);
   }
 

@@ -18,13 +18,14 @@ export class ExamUpdateComponent implements OnInit {
 
   @Input()
   exam: Exam;
+  components: ExamComponent[];
+  versionarray: Version[];
 
   error: string;
 
-  apples: ExamComponent[] = [];
-
   examForm: FormGroup;
   examComponent: FormArray;
+  versions: FormArray;
   componentArray = ['Reading', 'Reading and Use of English', 'Reading and Writing', 'Writing', 'Listening', 'Speaking'];
 
 
@@ -37,12 +38,22 @@ export class ExamUpdateComponent implements OnInit {
 
   ngOnInit() {
     const key = this.route.snapshot.paramMap.get('key');
-    const sub = this.examService.getExam(key).subscribe(exam => {
+    this.examService.getExam(key).subscribe(exam => {
       this.exam = exam;
       this.examForm.reset({
-        examName: this.exam.name,
+        examName: this.exam.name
       });
-      this.setComponents(this.exam.components);
+      this.examService.getComponents(key).subscribe(components => {
+        this.components = components;
+        for (const component of components) {
+          const ckey = component.$key;
+          this.examService.getVersions(key, ckey).subscribe(versions => {
+            component.versions = versions;
+            console.log(component);
+          });
+        }
+        this.setComponents(this.components);
+      });
     });
   }
 
@@ -50,6 +61,12 @@ export class ExamUpdateComponent implements OnInit {
     const componentFGs = components.map(component => this.fb.group(component));
     const componentFormArray = this.fb.array(componentFGs);
     this.examForm.setControl('examComponents', componentFormArray);
+  }
+
+  setVersions(versions: Version[]) {
+    const versionFGs = versions.map(version => this.fb.group(version));
+    const versionFormArray = this.fb.array(versionFGs);
+    this.examForm.setControl('versions', versionFormArray);
   }
 
   createForm() {
@@ -97,7 +114,7 @@ export class ExamUpdateComponent implements OnInit {
     return this.examForm.get('examComponents') as FormArray;
   }
 
-  get versions(): FormArray {
+  get version(): FormArray {
     return this.examForm.get('versions') as FormArray;
   }
 

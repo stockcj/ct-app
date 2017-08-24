@@ -23,6 +23,14 @@ export class ExamService {
     return this.db.object('exams/' + $key);
   }
 
+  getComponents($key: string): FirebaseListObservable<ExamComponent[]> {
+    return this.db.list('exams/' + $key + '/components/');
+  }
+
+  getVersions(ekey: string, ckey: string): FirebaseListObservable<Version[]> {
+    return this.db.list('exams/' + ekey + '/components/' + ckey + '/versions/');
+  }
+
   createExam(exam: Exam): ReplaySubject<any> {
     const resultSubject = new ReplaySubject(1);
 
